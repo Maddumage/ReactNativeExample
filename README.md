@@ -29,11 +29,25 @@ React Native example with consuming REST APIs
   
   * react-navigation
   
+    https://reactnavigation.org/docs/en/getting-started.html
+  
   * react-redux
+  
+    npm install --save react-redux
+    https://redux.js.org/basics/usage-with-react
   
   * redux
   
-  * redux-thunk
+    npm install --save redux
+    https://redux.js.org/introduction/installation
   
-  * react-native-indicators
+  * redux-thunk (Thunk middleware for Redux)
+    
+    npm install redux-thunk
+    https://github.com/reduxjs/redux-thunk
+  
+  * react-native-indicators (Activity indicator collection for React Native)
+    
+    npm install --save react-native-indicators
+    https://www.npmjs.com/package/react-native-indicators
   
