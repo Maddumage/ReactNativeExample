@@ -51,3 +51,8 @@ React Native example with consuming REST APIs
     npm install --save react-native-indicators
     https://www.npmjs.com/package/react-native-indicators
   
+  * react-native-vector-icons 
+    
+    npm install react-native-vector-icons --save
+    react-native link
+    https://github.com/oblador/react-native-vector-icons
