@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
+
+const entireScreenWidth = Dimensions.get('window').width;
+EStyleSheet.build({ $rem: entireScreenWidth / 380 });
 
 class SplashScreen extends Component {
   constructor(props) {
@@ -27,7 +30,7 @@ const styles = EStyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "blue"
+    backgroundColor: "#4a148c"
   },
   text: {
     color: "white",
