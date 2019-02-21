@@ -1,6 +1,14 @@
 # ReactNativeExample
 React Native example with consuming REST APIs
 
+To run the application,
+  1. git clone 
+  2. git cd ReactNativeExample
+  3. npm install
+  4. react-native link
+  5. react-native run-android 
+  if you got error please open the android project folder from the Android Studio and sync. then again try step 5.
+
 # Setup the envirnoment
   Before begin setup your working environment for react native development. 
   The best guide available in react native documentation and follow those steps.
