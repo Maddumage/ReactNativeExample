@@ -64,3 +64,8 @@ To run the application,
     npm install react-native-vector-icons --save
     react-native link
     https://github.com/oblador/react-native-vector-icons
+
+  * react-native-extended-stylesheet
+
+    npm i react-native-extended-stylesheet --save
+    https://www.npmjs.com/package/react-native-extended-stylesheet
