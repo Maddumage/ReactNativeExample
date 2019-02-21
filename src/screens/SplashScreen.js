@@ -3,7 +3,16 @@ import { View, Text } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 class SplashScreen extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this._bootstrapAsync();
+  }
+
+  _bootstrapAsync = () => {
+    setTimeout(() => {
+      this.props.navigation.navigate("App");
+    }, 2000);
+  };
   render() {
     return (
       <View style={styles.mainContainer}>
