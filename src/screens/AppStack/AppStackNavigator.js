@@ -6,11 +6,9 @@ export const AppStackNavigator = createStackNavigator(
     {
         HomeScreen: {
             screen: HomeScreen,
-            headerMode: 'none',
-            header: null,
-            navigationOptions: {
-                header: null
-            }
+            navigationOptions: () => ({
+                title: 'Home',
+            })
         }
     },
     {
