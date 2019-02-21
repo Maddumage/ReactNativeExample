@@ -22,10 +22,10 @@ const styles = EStyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "blue"
+    backgroundColor: "white"
   },
   text: {
-    color: "white",
+    color: "#4a148c",
     fontSize: "16rem",
     fontWeight: "bold"
   }
