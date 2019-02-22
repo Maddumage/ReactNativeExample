@@ -69,7 +69,7 @@ class HomeScreen extends Component {
       );
     } catch (error) {
       console.error(error);
-      this.setState({loading: false, error: true})
+      this.setState({ loading: false, error: true });
     }
   };
 
