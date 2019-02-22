@@ -1,8 +1,16 @@
 //import liraries
 import React, { Component } from "react";
-import { View, Text, Dimensions, FlatList, NetInfo } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  FlatList,
+  NetInfo,
+  TouchableOpacity
+} from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { BallIndicator } from "react-native-indicators";
+import {OfflineNotice} from "../../components/OfflineNotice";
 
 const entireScreenWidth = Dimensions.get("window").width;
 EStyleSheet.build({ $rem: entireScreenWidth / 380 });
@@ -13,11 +21,10 @@ class HomeScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      loading: true,
       error: false,
-      isConnected: null,
-      timer: null,
-      dataSource: null
+      isConnected: true,
+      dataSource: null,
+      timer: null
     };
     this.timer = this.timer.bind(this);
     this.loadData = this.loadData.bind(this);
@@ -34,6 +41,7 @@ class HomeScreen extends Component {
     this.setState({ timer });
     // this.loadData()
   }
+
   componentWillUnmount() {
     clearInterval(this.state.timer);
   }
@@ -46,6 +54,7 @@ class HomeScreen extends Component {
       clearInterval(this.state.timer);
     } else {
       console.log("No Internet");
+      this.setState({ isConnected: false, isLoading: false, error: true });
       NetInfo.getConnectionInfo().then(connectionInfo => {
         this.setState({ isConnected: connectionInfo.type !== "none" });
       });
@@ -57,25 +66,44 @@ class HomeScreen extends Component {
       const response = await fetch(
         "https://facebook.github.io/react-native/movies.json"
       );
-      const responseJson = await response.json();
-      this.setState(
-        {
-          isLoading: false,
-          loading: false,
-          dataSource: responseJson.movies,
-          error: false
-        },
-        function() {}
-      );
-    } catch (error) {
-      console.error(error);
+      const data = await response.json();
+      console.log(data);
+      this.setState({
+        isLoading: false,
+        dataSource: data.movies,
+        error: false
+      });
+      console.log(this.state.dataSource);
+    } catch (e) {
+      console.log(e);
       this.setState({ loading: false, error: true });
     }
   };
 
+  // async fetchData() {
+  //   if (this.state.isConnected) {
+  //     try {
+  //       const response = await fetch(
+  //         "https://facebook.github.io/react-native/movies.json"
+  //       );
+  //       const responseJson = await response.json();
+  //       this.setState(
+  //         {
+  //           isLoading: false,
+  //           dataSource: responseJson.movies
+  //         },
+  //         function() {}
+  //       );
+  //     } catch (error) {
+  //       console.error(error);
+  //       this.setState({ loading: false, error: true });
+  //     }
+  //   }
+  // }
+
   render() {
-    const { loading, error } = this.state;
-    if (loading) {
+    const { isLoading, error } = this.state;
+    if (isLoading) {
       return (
         <View style={styles.mainContainer}>
           <BallIndicator color="red" />
@@ -86,7 +114,7 @@ class HomeScreen extends Component {
       return (
         <View style={styles.mainContainer}>
           <Text>Failed to load information!</Text>
-          <Text style={styles.errorText}>Please check your connection</Text>
+          <Text style={styles.errorText}>Please check your internet connection</Text>
           <TouchableOpacity style={styles.refreshBtn} onPress={this.loadData}>
             <Text style={styles.refreshText}>Refresh</Text>
           </TouchableOpacity>
@@ -95,6 +123,7 @@ class HomeScreen extends Component {
     }
     return (
       <View style={styles.mainContainer}>
+        <OfflineNotice />
         <FlatList
           data={this.state.dataSource}
           renderItem={({ item }) => (
@@ -129,7 +158,11 @@ const styles = EStyleSheet.create({
   refreshBtn: {
     width: entireScreenWidth - 60,
     height: "50rem",
-    backgroundColor: "red"
+    backgroundColor: "blue",
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '4rem',
+    marginVertical:'16rem'
   },
   refreshText: {
     color: "#ffffff",

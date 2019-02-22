@@ -14,8 +14,36 @@ function MiniOfflineSign() {
 }
 
 class OfflineNotice extends PureComponent {
+  state = {
+    isConnected: true
+  };
+
+  componentDidMount() {
+    NetInfo.isConnected.addEventListener(
+      "connectionChange",
+      this.handleConnectivityChange
+    );
+  }
+
+  componentWillUnmount() {
+    NetInfo.isConnected.removeEventListener(
+      "connectionChange",
+      this.handleConnectivityChange
+    );
+  }
+
+  handleConnectivityChange = isConnected => {
+    if (isConnected) {
+      this.setState({ isConnected });
+    } else {
+      this.setState({ isConnected });
+    }
+  };
   render() {
-    return <MiniOfflineSign />;
+    if (!this.state.isConnected) {
+      return <MiniOfflineSign />;
+    }
+    return null;
   }
 }
 
@@ -28,10 +56,12 @@ const styles = EStyleSheet.create({
     flexDirection: "row",
     width,
     position: "absolute",
-    top: "30rem"
+    top: "0rem",
+    elevation: 1
   },
   offlineText: {
     color: "#fff"
   }
 });
-export default OfflineNotice;
+
+export {OfflineNotice};
